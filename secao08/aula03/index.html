@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula 03 - Eventos Inline</title>
+</head>
+
+<body onclick="mudarCor()">
+
+  <h1 id="texto"></h1>
+
+  <input onkeyup="escreverTexto(this)">
+
+
+
+  <br>
+  <br>
+
+  <button onclick="mostrarAlerta()">Por favor, clique-me!</button>
+
+  <br>
+  <br>
+
+  <span class="info" onmouseover="mudarTexto(this)">
+    <b>Atenção</b> não clique no botão acima!
+  </span>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

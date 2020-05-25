@@ -1,0 +1,1 @@
+removerBotao = (btn) => document.querySelector('#app').removeChild(btn);
