@@ -1,9 +1,9 @@
-import api from './api';
+import api from "./api";
 
 class App {
   constructor() {
     // Lista de repositórios
-    this.repositories = JSON.parse(localStorage.getItem('@repositories')) || [];
+    this.repositories = JSON.parse(localStorage.getItem("@repositories")) || [];
 
     // Form
     this.form = document.querySelector("form");
@@ -20,7 +20,7 @@ class App {
     event.preventDefault();
 
     // Recuperar o valor do input
-    let input = this.form.querySelector('input[id=repositorio]').value;
+    let input = this.form.querySelector("input[id=repositorio]").value;
 
     if (input.length === 0) {
       return;
@@ -37,57 +37,57 @@ class App {
         html_url,
         owner: {
           avatar_url
-        }
-      } = (response.data);
-
-
+        },
+      } = response.data;
 
       this.repositories.push({
         name,
         description,
         avatar_url,
-        link: html_url
+        link: html_url,
       });
 
       this.renderScreen();
 
       this.saveDataToStorage();
-
     } catch (err) {
-      this.list.removeChild(document.querySelector('.list-group-item-warning'));
+      this.list.removeChild(document.querySelector(".list-group-item-warning"));
 
-      let er = this.list.querySelector('.list-group-item-danger');
+      let er = this.list.querySelector(".list-group-item-danger");
       if (er !== null) {
         this.list.removeChild(er);
       }
 
-      let li = document.createElement('li');
-      li.setAttribute('class', 'list-group-item list-group-item-danger');
-      let txtError = document.createTextNode(`O repositório ${input} não existe`);
+      let li = document.createElement("li");
+      li.setAttribute("class", "list-group-item list-group-item-danger");
+      let txtError = document.createTextNode(
+        `O repositório ${input} não existe`
+      );
       li.appendChild(txtError);
       this.list.appendChild(li);
     }
   }
 
   apresentarBuscando() {
-    let li = document.createElement('li');
-    li.setAttribute('class', 'list-group-item list-group-item-warning');
-    let txtBuscando = document.createTextNode(`Aguarde buscando o repositório...`);
+    let li = document.createElement("li");
+    li.setAttribute("class", "list-group-item list-group-item-warning");
+    let txtBuscando = document.createTextNode(
+      `Aguarde buscando o repositório...`
+    );
     li.appendChild(txtBuscando);
     this.list.appendChild(li);
   }
 
   renderScreen() {
-
     this.list.innerHTML = "";
 
     this.repositories.forEach((repository) => {
       // criando <li>
       let itemList = document.createElement("li");
-      itemList.setAttribute('class', 'list-group-item list-group-item-action');
-      itemList.setAttribute('onclick', 'deleteRepository(this)');
+      itemList.setAttribute("class", "list-group-item list-group-item-action");
+      itemList.setAttribute("onclick", "deleteRepository(this)");
 
-      console.log(itemList)
+      console.log(itemList);
 
       // criando <img>
       let img = document.createElement("img");
@@ -118,7 +118,7 @@ class App {
       this.list.appendChild(itemList);
 
       // limpar o conteúdo do input
-      this.form.querySelector("input[id=repositorio]").value = '';
+      this.form.querySelector("input[id=repositorio]").value = "";
 
       // adiciona foco no inpuit
       this.form.querySelector("input[id=repositorio]").focus();
@@ -126,7 +126,7 @@ class App {
   }
 
   saveDataToStorage() {
-    localStorage.setItem('@repositories', JSON.stringify(this.repositories))
+    localStorage.setItem("@repositories", JSON.stringify(this.repositories));
   }
 
   registerRepository() {
@@ -140,7 +140,7 @@ class App {
     this.repositories.splice(this.repositories.indexOf(repository.name), 1);
     this.saveDataToStorage();
     this.renderScreen();
-  }
+  };
 }
 
 new App();
